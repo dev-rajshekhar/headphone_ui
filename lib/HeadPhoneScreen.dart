@@ -8,11 +8,23 @@ class HeadPhoneScreen extends StatefulWidget {
 }
 
 class _HeadPhoneScreenState extends State<HeadPhoneScreen> {
+  PageController _pageController = PageController();
+  double currentPage = 0;
   List<String> _tabData = ["Popular", "Recommended", "New"];
   List<String> _brandName = ["Sony", "JBL", "Bose", "Apple"];
   var selectedBrand = "JBL";
   var selectedFilter = "Popular";
 
+
+  @override
+  void initState() {
+    _pageController.addListener((){
+      setState(() {
+        currentPage = _pageController.page;
+      });
+    });
+    super.initState();
+  }
   setSelectedBrand(brand) {
     setState(() {
       selectedBrand = brand;
@@ -283,7 +295,8 @@ class _HeadPhoneScreenState extends State<HeadPhoneScreen> {
                         )),
               ),
             ),
-          )
+          ),
+
         ]));
   }
 }
